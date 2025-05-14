@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creative Services | The Visual Chess</title>
+    <style>
+        /* Base Styles */
+        :root {
+            --primary: rgba(12, 2, 32, 0.938);
+            --secondary: rgba(12, 2, 32, 0.938);
+            --accent: rgba(111, 65, 210, 0.25);
+            --light:  rgba(12, 2, 32, 0.938);
+            --dark: #0c0220;
+            --gray: #6c757d;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .logo span {
+            color: var(--accent);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--accent);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--dark);
+            padding: 0.8rem 1.8rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Services Section */
+        .services {
+            padding: 5rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 1rem;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--accent);
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .service-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .service-img {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .service-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .service-card:hover .service-img img {
+            transform: scale(1.1);
+        }
+        
+        .service-content {
+            padding: 1.5rem;
+        }
+        
+        .service-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        .service-content p {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+        }
+        
+        .service-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .price {
+            font-weight: 700;
+            color: var(--accent);
+            font-size: 1.2rem;
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            background-color: var(--primary);
+            padding: 5rem 0;
+            color: white;
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 10px;
+            position: relative;
+        }
+        
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            font-size: 5rem;
+            color: rgba(255, 255, 255, 0.1);
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+        
+        .testimonial-content {
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .author-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 1rem;
+        }
+        
+        .author-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .author-info h4 {
+            margin-bottom: 0.2rem;
+        }
+        
+        .author-info p {
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+        
+        /* CTA Section */
+        .cta {
+            padding: 5rem 0;
+            text-align: center;
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            color: white;
+        }
+        
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .cta p {
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            font-size: 1.1rem;
+        }
+        
+        .btn-light {
+            background: white;
+            color: var(--primary);
+        }
+        
+        /* Footer - Using your provided footer styles */
+        .footer3_component {
+            background-color: #1a1a1a;
+            color: white;
+        }
+        
+        .padding-global {
+            padding-left: 2.5rem;
+            padding-right: 2.5rem;
+        }
+        
+        .container-large {
+            width: 100%;
+            max-width: 80rem;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .padding-vertical {
+            padding-top: 2.5rem;
+            padding-bottom: 2.5rem;
+        }
+        
+        .padding-xxlarge {
+            padding: 4rem;
+        }
+        
+        .footer3_top-wrapper {
+            grid-template-columns: 1fr 2fr;
+        }
+        
+        .w-layout-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 2rem;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .footer3_top-wrapper {
+                grid-template-columns: 1fr;
+            }
+            
+            .w-layout-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: var(--primary);
+                flex-direction: column;
+                padding: 1rem 0;
+            }
+            
+            nav ul.show {
+                display: flex;
+            }
+            
+            nav ul li {
+                margin: 0;
+                text-align: center;
+                padding: 0.5rem 0;
+            }
+            
+            .hero {
+                height: 50vh;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .w-layout-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .padding-global {
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+            }
+            
+            .padding-xxlarge {
+                padding: 2rem;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .btn {
+                padding: 0.6rem 1.4rem;
+            }
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <!-- <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">The Visual <span>Chess</span></a>
+            <button class="mobile-menu-btn">☰</button>
+            <nav>
+                <ul id="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html" class="active">Services</a></li>
+                    <li><a href="portfolio.html">Portfolio</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header> -->
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Creative Services That Move Your Business Forward</h1>
+                <p>We combine strategy, creativity, and technology to deliver exceptional results for your brand</p>
+                <a href="#contact" class="btn">Get Started</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Services</h2>
+                <p>Comprehensive solutions tailored to your business needs</p>
+            </div>
+            
+            <div class="services-grid">
+                <!-- Service 1 -->
+                <div class="service-card">
+                    <div class="service-img">
+                        <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Strategic Consulting">
+                    </div>
+                    <div class="service-content">
+                        <h3>Strategic Consulting</h3>
+                        <p>Our expert consultants analyze your business challenges and opportunities to develop customized strategies that drive growth and competitive advantage.</p>
+                        <div class="service-meta">
+                            <span class="price">Starting at $2,500</span>
+                            <a href="#" class="btn">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="service-card">
+                    <div class="service-img">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Brand Development">
+                    </div>
+                    <div class="service-content">
+                        <h3>Brand Development</h3>
+                        <p>From logo design to complete brand identity systems, we create memorable brands that resonate with your target audience.</p>
+                        <div class="service-meta">
+                            <span class="price">Starting at $3,800</span>
+                            <a href="#" class="btn">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="service-card">
+                    <div class="service-img">
+                        <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Digital Marketing">
+                    </div>
+                    <div class="service-content">
+                        <h3>Digital Marketing</h3>
+                        <p>Comprehensive digital marketing strategies including SEO, PPC, social media, and content marketing to grow your online presence.</p>
+                        <div class="service-meta">
+                            <span class="price">Starting at $1,800/mo</span>
+                            <a href="#" class="btn">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Service 4 -->
+                <div class="service-card">
+                    <div class="service-img">
+                        <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Web Development">
+                    </div>
+                    <div class="service-content">
+                        <h3>Web Development</h3>
+                        <p>Custom websites and web applications designed for performance, user experience, and conversion optimization.</p>
+                        <div class="service-meta">
+                            <span class="price">Starting at $4,500</span>
+                            <a href="#" class="btn">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Service 5 -->
+                <div class="service-card">
+                    <div class="service-img">
+                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Content Creation">
+                    </div>
+                    <div class="service-content">
+                        <h3>Content Creation</h3>
+                        <p>High-quality, engaging content including copywriting, photography, videography, and graphic design for all your marketing needs.</p>
+                        <div class="service-meta">
+                            <span class="price">Starting at $1,200</span>
+                            <a href="#" class="btn">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Service 6 -->
+                <div class="service-card">
+                    <div class="service-img">
+                        <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Data Analytics">
+                    </div>
+                    <div class="service-content">
+                        <h3>Data Analytics</h3>
+                        <p>Turn your data into actionable insights with our comprehensive analytics services and business intelligence solutions.</p>
+                        <div class="service-meta">
+                            <span class="price">Starting at $2,800/mo</span>
+                            <a href="#" class="btn">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>What Our Clients Say</h2>
+                <p>Success stories from businesses we've helped transform</p>
+            </div>
+            
+            <div class="testimonial-grid">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>The Visual Chess team transformed our digital presence completely. Our website traffic increased by 300% within 6 months of working with them.</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-img">
+                            <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Sarah Johnson">
+                        </div>
+                        <div class="author-info">
+                            <h4>Sarah Johnson</h4>
+                            <p>CEO, TechSolutions Inc.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>Their strategic consulting helped us identify new market opportunities we hadn't considered. The results have been game-changing for our business.</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-img">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Michael Chen">
+                        </div>
+                        <div class="author-info">
+                            <h4>Michael Chen</h4>
+                            <p>Founder, GreenStart</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>The brand identity they created for us perfectly captures our company values and has significantly improved our customer engagement.</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-img">
+                            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Emma Rodriguez">
+                        </div>
+                        <div class="author-info">
+                            <h4>Emma Rodriguez</h4>
+                            <p>Marketing Director, UrbanEats</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta" id="contact">
+        <div class="container">
+            <h2>Ready to Transform Your Business?</h2>
+            <p>Let's discuss how we can help you achieve your goals. Our team is ready to provide customized solutions for your unique challenges.</p>
+            <a href="contact.html" class="btn btn-light">Get in Touch</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <!-- <footer class="footer3_component">
+        <div class="padding-global">
+            <div class="container-large">
+                <div class="padding-vertical padding-xxlarge">
+                    <div class="padding-bottom padding-xxlarge">
+                        <div class="w-layout-grid footer3_top-wrapper">
+                            <div class="footer3_left-wrapper">
+                                <div class="margin-bottom margin-medium"><a href="/" aria-current="page"
+                                        class="footer3_logo-link w-nav-brand w--current"><img src="logo.png"
+                                            loading="lazy" alt="" /></a>
+                                </div>
+                                <div class="margin-bottom margin-medium">
+                                    <div class="footer3_details-wrapper">
+                                        <div class="margin-bottom margin-small">
+                                            <div class="text-custom_footer">Accelerated gateway to a Global Network
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="w-layout-grid footer3_social-list">
+                                    <a href="#" target="_blank" class="footer3_social-link w-inline-block">
+                                        <div class="icon-embed-xsmall w-embed"><svg width="100%" height="100%"
+                                                viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M17.1761 4H19.9362L13.9061 10.7774L21 20H15.4456L11.0951 14.4066L6.11723 20H3.35544L9.80517 12.7508L3 4H8.69545L12.6279 9.11262L17.1761 4ZM16.2073 18.3754H17.7368L7.86441 5.53928H6.2232L16.2073 18.3754Z"
+                                                    fill="CurrentColor" />
+                                            </svg></div>
+                                    </a>
+                                    <a href="#" target="_blank" class="footer3_social-link w-inline-block">
+                                        <div class="icon-embed-xsmall w-embed"><svg width="100%" height="100%"
+                                                viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M4.5 3C3.67157 3 3 3.67157 3 4.5V19.5C3 20.3284 3.67157 21 4.5 21H19.5C20.3284 21 21 20.3284 21 19.5V4.5C21 3.67157 20.3284 3 19.5 3H4.5ZM8.52076 7.00272C8.52639 7.95897 7.81061 8.54819 6.96123 8.54397C6.16107 8.53975 5.46357 7.90272 5.46779 7.00413C5.47201 6.15897 6.13998 5.47975 7.00764 5.49944C7.88795 5.51913 8.52639 6.1646 8.52076 7.00272ZM12.2797 9.76176H9.75971H9.7583V18.3216H12.4217V18.1219C12.4217 17.742 12.4214 17.362 12.4211 16.9819V16.9818V16.9816V16.9815V16.9812C12.4203 15.9674 12.4194 14.9532 12.4246 13.9397C12.426 13.6936 12.4372 13.4377 12.5005 13.2028C12.7381 12.3253 13.5271 11.7586 14.4074 11.8979C14.9727 11.9864 15.3467 12.3141 15.5042 12.8471C15.6013 13.1803 15.6449 13.5389 15.6491 13.8863C15.6605 14.9339 15.6589 15.9815 15.6573 17.0292V17.0294C15.6567 17.3992 15.6561 17.769 15.6561 18.1388V18.3202H18.328V18.1149C18.328 17.6629 18.3278 17.211 18.3275 16.7591V16.759V16.7588C18.327 15.6293 18.3264 14.5001 18.3294 13.3702C18.3308 12.8597 18.276 12.3563 18.1508 11.8627C17.9638 11.1286 17.5771 10.5211 16.9485 10.0824C16.5027 9.77019 16.0133 9.5691 15.4663 9.5466C15.404 9.54401 15.3412 9.54062 15.2781 9.53721L15.2781 9.53721L15.2781 9.53721C14.9984 9.52209 14.7141 9.50673 14.4467 9.56066C13.6817 9.71394 13.0096 10.0641 12.5019 10.6814C12.4429 10.7522 12.3852 10.8241 12.2991 10.9314L12.2991 10.9315L12.2797 10.9557V9.76176ZM5.68164 18.3244H8.33242V9.76733H5.68164V18.3244Z"
+                                                    fill="CurrentColor" />
+                                            </svg></div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="w-layout-grid footer3_menu-wrapper">
+                                <div class="footer3_link-list"><a href="#"
+                                        class="footer3_link is-header">Objectives</a><a
+                                        href="/objectives/lead-acquisition" class="footer3_link">Lead
+                                        Acquisition</a><a href="/objectives/market-intelligence"
+                                        class="footer3_link">Marketing Intelligence</a>
+                                    <a href="/objectives/strategic-partnerships" class="footer3_link">Strategic
+                                        Partnerships</a><a href="/objectives/finance" class="footer3_link">Finance</a><a
+                                        href="/objectives/talent-acquisition" class="footer3_link">Talent
+                                        Acquisition</a>
+                                </div>
+                                <div class="footer3_link-list"><a href="#" class="footer3_link is-header">Business
+                                        type</a><a href="/business/startups-and-smes" class="footer3_link">Startups
+                                        and SMEs</a><a href="/business/enterprise" class="footer3_link">Large
+                                        Enterprises</a><a href="/business/government" class="footer3_link">Governments
+                                        and<br />Public Sector</a><a href="/business/investors"
+                                        class="footer3_link">Investors</a></div>
+                                <div class="footer3_link-list"><a href="#"
+                                        class="footer3_link is-header">Resources</a><a href="#"
+                                        class="footer3_link">About us</a><a href="/pricing"
+                                        class="footer3_link">Pricing</a><a href="/become-a-pidge"
+                                        class="footer3_link">Become The Visual Chess</a><a href="/blog"
+                                        class="footer3_link">Blog</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="line-divider"></div>
+                    <div class="padding-top padding-medium">
+                        <div class="footer3_bottom-wrapper">
+                            <div class="w-layout-grid footer3_legal-list"><a href="#" class="footer3_legal-link">Terms
+                                    of
+                                    Use</a><a href="#" class="footer3_legal-link">Accessibility Statement</a><a
+                                    id="w-node-_0289a592-07dc-bf9c-0ccf-b5f44e2e6dc1-4e2e6d7e" href="#"
+                                    class="footer3_legal-link">Cookies
+                                    Policy</a>
+                                <a id="w-node-_0289a592-07dc-bf9c-0ccf-b5f44e2e6dc3-4e2e6d7e" href="#"
+                                    class="footer3_legal-link">Privacy Policy</a>
+                            </div>
+                            <div class="footer3_credit-text">© 2025 The Visual Chess. All right reserved.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer> -->
+
+    <script>
+        // Mobile Menu Toggle
+        const menuBtn = document.querySelector('.mobile-menu-btn');
+        const navMenu = document.getElementById('nav-menu');
+        
+        menuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('show');
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Update copyright year
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

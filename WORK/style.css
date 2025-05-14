@@ -10836,7 +10836,7 @@ figcaption {
 }
 
 .section_blog-posts {
-  background-color: var(--base-color-brand--white);
+  background-color: linear-gradient(to top, rgba(45, 64, 234, .1), rgba(255, 255, 255, 0));
   color: var(--base-color-brand--black);
 }
 
@@ -10845,7 +10845,7 @@ figcaption {
 }
 
 .filters__group {
-  border-bottom: 1px solid #e0dcec;
+  border-bottom: 1px solid #210F37;
   margin-bottom: 3rem;
   padding-bottom: 3rem;
 }
